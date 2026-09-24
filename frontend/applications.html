@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Job Radar — Applications</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <h1>🎯 Job Radar</h1>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="applications.html" class="active">Applications</a>
+    <a href="companies.html">Companies</a>
+  </nav>
+</header>
+
+<main>
+  <div class="filters">
+    <select id="statusFilter">
+      <option value="applied" selected>Applied</option>
+      <option value="interviewing">Interviewing</option>
+      <option value="offer">Offer</option>
+      <option value="rejected">Rejected</option>
+      <option value="ignored">Not Interested</option>
+    </select>
+  </div>
+  <div id="appList"></div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/applications.js"></script>
+</body>
+</html>

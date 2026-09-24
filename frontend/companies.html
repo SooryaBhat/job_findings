@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Job Radar — Target Companies</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <h1>🎯 Job Radar</h1>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="applications.html">Applications</a>
+    <a href="companies.html" class="active">Companies</a>
+  </nav>
+</header>
+
+<main>
+  <!-- Stats Bar for Companies -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="num" id="statTotalComp">0</div>
+      <div class="label">Total Companies</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="statWorkingComp">0</div>
+      <div class="label">Working Collectors</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="statReviewComp">0</div>
+      <div class="label">Needs Review</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="statActiveComp">0</div>
+      <div class="label">Active Companies</div>
+    </div>
+  </div>
+
+  <!-- Add Company Card -->
+  <div class="section-title">Add Target Company</div>
+  <div class="card" style="background: rgba(30, 41, 59, 0.6);">
+    <div class="filters-bar" style="border: none; padding: 0; background: transparent; margin-bottom: 12px;">
+      <input id="newName" placeholder="Company name *" style="flex: 1; min-width: 180px;" />
+      <input id="newWebsite" placeholder="Website URL (optional)" style="flex: 1; min-width: 180px;" />
+      <input id="newUrl" placeholder="Careers page URL (e.g. https://abc.ai/careers)" style="flex: 2; min-width: 240px;" />
+    </div>
+
+    <div class="filters-bar" style="border: none; padding: 0; background: transparent; margin-bottom: 0;">
+      <select id="newCategory">
+        <option value="tech">Tech / Software</option>
+        <option value="ai">AI / ML Specialized</option>
+        <option value="consulting">Consulting / Strategy</option>
+        <option value="finance">Finance / Quant</option>
+        <option value="startup">High Growth Startup</option>
+      </select>
+
+      <select id="newTier">
+        <option value="dream">⭐ Dream Company</option>
+        <option value="high_priority">🔥 High Priority</option>
+        <option value="good" selected>🎯 Good Target</option>
+        <option value="startup">🚀 Startup</option>
+        <option value="backup">📦 Backup</option>
+      </select>
+
+      <select id="newAts">
+        <option value="pending">Auto-Detect Platform</option>
+        <option value="greenhouse">Greenhouse</option>
+        <option value="lever">Lever</option>
+        <option value="ashby">Ashby</option>
+        <option value="workday">Workday</option>
+        <option value="smartrecruiters">SmartRecruiters</option>
+        <option value="icims">iCIMS</option>
+        <option value="successfactors">SuccessFactors</option>
+        <option value="taleo">Taleo</option>
+        <option value="custom">Custom Page</option>
+      </select>
+
+      <input id="newIdent" placeholder="ATS Identifier (optional)" style="flex: 1; min-width: 160px;" />
+
+      <button class="primary" onclick="addCompany()">+ Add Company</button>
+    </div>
+  </div>
+
+  <!-- Search & Filter Companies -->
+  <div class="section-title">
+    <span>Target Companies Monitoring</span>
+    <button class="subtle" onclick="loadCompanies()">↻ Refresh List</button>
+  </div>
+
+  <div class="filters-bar">
+    <input id="searchCompInput" placeholder="Search by company name..." style="flex: 2; min-width: 200px;" />
+    
+    <select id="filterTier">
+      <option value="all">All Tiers</option>
+      <option value="dream">⭐ Dream</option>
+      <option value="high_priority">🔥 High Priority</option>
+      <option value="good">🎯 Good Target</option>
+      <option value="startup">🚀 Startup</option>
+      <option value="backup">📦 Backup</option>
+    </select>
+
+    <select id="filterStatus">
+      <option value="all">All Statuses</option>
+      <option value="working">✅ Working</option>
+      <option value="needs_review">⚠️ Needs Review</option>
+      <option value="failed">❌ Failed</option>
+      <option value="pending">⏳ Pending</option>
+    </select>
+  </div>
+
+  <!-- Companies Table -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Priority</th>
+          <th>ATS Platform</th>
+          <th>Careers Page</th>
+          <th>Status</th>
+          <th>Jobs</th>
+          <th>Last Checked</th>
+          <th>Active</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="companyRows"></tbody>
+    </table>
+  </div>
+</main>
+
+<!-- Edit Company Modal -->
+<div id="editModal" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <h3 style="margin-top: 0; color: #38bdf8;">Edit Company Configuration</h3>
+    <input type="hidden" id="editId" />
+    <div style="display: flex; flex-direction: column; gap: 12px; margin: 16px 0;">
+      <div>
+        <label style="font-size: 12px; color: #94a3b8;">Company Name</label>
+        <input id="editName" style="width: 100%;" />
+      </div>
+      <div>
+        <label style="font-size: 12px; color: #94a3b8;">Careers Page URL</label>
+        <input id="editCareersUrl" style="width: 100%;" />
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <div style="flex: 1;">
+          <label style="font-size: 12px; color: #94a3b8;">Priority Tier</label>
+          <select id="editTier" style="width: 100%;">
+            <option value="dream">Dream</option>
+            <option value="high_priority">High Priority</option>
+            <option value="good">Good Target</option>
+            <option value="startup">Startup</option>
+            <option value="backup">Backup</option>
+          </select>
+        </div>
+        <div style="flex: 1;">
+          <label style="font-size: 12px; color: #94a3b8;">ATS Platform</label>
+          <select id="editAts" style="width: 100%;">
+            <option value="greenhouse">Greenhouse</option>
+            <option value="lever">Lever</option>
+            <option value="ashby">Ashby</option>
+            <option value="workday">Workday</option>
+            <option value="smartrecruiters">SmartRecruiters</option>
+            <option value="custom">Custom</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label style="font-size: 12px; color: #94a3b8;">ATS Identifier</label>
+        <input id="editIdent" style="width: 100%;" />
+      </div>
+    </div>
+    <div style="display: flex; justify-content: flex-end; gap: 10px;">
+      <button class="subtle" onclick="closeEditModal()">Cancel</button>
+      <button class="primary" onclick="saveEditCompany()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/companies.js"></script>
+</body>
+</html>

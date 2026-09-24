@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Job Radar — Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <h1>🎯 Job Radar</h1>
+  <nav>
+    <a href="index.html" class="active">Dashboard</a>
+    <a href="applications.html">Applications</a>
+    <a href="companies.html">Companies</a>
+  </nav>
+</header>
+
+<main>
+  <!-- Summary Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="num" id="statTotalJobs">0</div>
+      <div class="label">New Jobs</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="statHighMatch">0</div>
+      <div class="label">High Match (85+)</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="statAiJobs">0</div>
+      <div class="label">AI / ML / DS Roles</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="statBlrJobs">0</div>
+      <div class="label">Bangalore / Remote</div>
+    </div>
+  </div>
+
+  <!-- Filters & Controls -->
+  <div class="filters-bar">
+    <input id="searchInput" placeholder="Search company or title..." style="flex: 2; min-width: 200px;" />
+    
+    <select id="trackFilter">
+      <option value="all">All Tracks</option>
+      <option value="ai_ml_ds">⚡ AI / ML / DS</option>
+      <option value="software">💻 Software / SDE</option>
+      <option value="data_analyst">📊 Data Analyst</option>
+    </select>
+
+    <select id="tierFilter">
+      <option value="all">All Difficulty Tiers</option>
+      <option value="reach">🎯 Reach (Dream)</option>
+      <option value="competitive">⚖️ Competitive</option>
+      <option value="achievable">✅ Achievable</option>
+    </select>
+
+    <select id="minScore">
+      <option value="0">Any Fit Score</option>
+      <option value="50">50+ Score</option>
+      <option value="70" selected>70+ Score</option>
+      <option value="85">85+ High Match</option>
+    </select>
+
+    <select id="locFilter">
+      <option value="all">All Locations</option>
+      <option value="prio1">📍 Bangalore / Remote India</option>
+      <option value="prio2">🏙️ Major Indian Cities</option>
+    </select>
+
+    <button id="refreshBtn" class="primary">↻ Refresh</button>
+  </div>
+
+  <!-- Job Feed Container -->
+  <div id="jobList"></div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

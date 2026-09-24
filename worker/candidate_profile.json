@@ -1,0 +1,23 @@
+{
+  "name": "Soorya Bhat",
+  "summary": "Third-year B.E. student in Artificial Intelligence & Data Science, Srinivas Institute of Technology, Mangalore. Hands-on project experience with FastAPI, Supabase/PostgreSQL, HTML/CSS/JS frontends, and AI/ML libraries. Targeting a job before graduation.",
+  "tracks": {
+    "ai_ml_ds": {
+      "label": "AI / ML / Data Science",
+      "resume_summary": "Built FinIQ (AI Financial Intelligence Platform), AttendIQ (AI-powered attendance system with biometrics), TalentMatch AI (resume analysis & ATS optimization SaaS), Internship Mission 2026 (AI prep platform using Gemini API). Comfortable with Python, ML/NLP basics, prompt engineering, FastAPI, Supabase/PostgreSQL.",
+      "keywords": ["machine learning", "deep learning", "nlp", "genai", "llm", "data science", "python", "ai engineer", "ml engineer", "data scientist", "computer vision", "pytorch", "tensorflow"]
+    },
+    "software": {
+      "label": "Software / Backend Engineering",
+      "resume_summary": "Built and deployed full-stack apps (FastAPI backend, Supabase/PostgreSQL, HTML/CSS/JS frontend) with real production deployment on Vercel. Comfortable with REST APIs, databases, git/GitHub workflows.",
+      "keywords": ["software engineer", "backend", "full stack", "python developer", "sde", "api", "fastapi", "django", "node", "javascript"]
+    },
+    "data_analyst": {
+      "label": "Data Analyst / Business Analyst",
+      "resume_summary": "Experience with SQL/PostgreSQL, data pipelines, dashboards, and business-facing AI tools (TalentMatch AI, FinIQ) that involved analyzing and presenting structured data.",
+      "keywords": ["data analyst", "business analyst", "sql", "power bi", "tableau", "excel", "reporting", "analytics"]
+    }
+  },
+  "location_priority": ["bangalore", "bengaluru", "remote india", "remote - india"],
+  "experience_level": "fresher / 0-1 years, final-year student, graduating 2027"
+}
